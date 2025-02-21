@@ -1,4 +1,5 @@
-public static void createNewContact(
+public class ApexUseCaseOne {
+  public static void createNewContact(
     String firstName,
     String lastName,
     String emailAddress
@@ -17,3 +18,4 @@ public static void createNewContact(
       insert conListToInsert;
     }
   }
+}
