@@ -6,16 +6,13 @@ public with sharing class ApexUseCaseFour {
         // loop through the contacts and extract the email addresses
         // return the list of email addresses
 
-        List<Account> accName = [SELECT Id FROM Account WHERE Name = :accountName LIMIT 1];
-        if(accName.size() == 1){
-            List<Contact> contactRecords = [SELECT Id, Email FROM Contact WHERE AccountId = :accName[0].Id];
+        // List<Account> accName = [SELECT Id FROM Account WHERE Name = :accountName LIMIT 1];
+            List<Contact> contactRecords = [SELECT Id, Email FROM Contact WHERE Account.Name = :accountName];
             for(Contact con : contactRecords){
                 if(con.Email != null){
                     emailList.add(con.Email);
                 }
             }
-        }
-
         return emailList;
     }
 }
