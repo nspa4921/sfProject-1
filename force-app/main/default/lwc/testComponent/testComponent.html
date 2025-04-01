@@ -1,0 +1,171 @@
+<template>
+    <div class="body">
+    <div class="banner" style="background-image: url(https://profile.digital.salesforce.com/images/u/default/golden-sun.png)"></div>
+
+    <div class="container">
+        <div class="left">
+            <div class="heading">
+                <div class="avatar">
+                    <img src={profileImageUrl} alt="Profile Picture">
+                </div>
+                <div class="details">
+                    <h1 class="name" title="Nemanja Spasic">{label.cvProfileName}</h1>
+                        <div class="company">{label.role}</div>
+                        <div class="location">{label.location}</div>
+                        <div class="social-links">
+                            <a target="_blank" href="https://www.linkedin.com/in/nemanja-spasic87/">
+                                <img src="https://www.svgrepo.com/show/110195/linkedin.svg"></img>
+                            </a>
+                        </div>
+                </div>
+                <div class="icon-group">
+                    <lightning-icon icon-name="utility:print" alternative-text="Print" size="small" title="Print"
+                        onclick={handlePrint}>
+                    </lightning-icon>
+                    <lightning-icon icon-name="utility:download" alternative-text="Download" size="small" title="Download"
+                        onclick={handleDownload}>
+                    </lightning-icon>
+                </div>
+                <div class="about-me">{label.aboutMeDesc}</div>
+            </div>
+
+            <div class="experience">
+                <div class="header">
+                    <h1>Experience</h1>
+                </div>
+
+                <template lwc:if={isLoadingWorkExp}>
+                    <lightning-spinner alternative-text="Loading work experiences..." size="medium"></lightning-spinner>
+                </template>
+
+                <template for:each={workExperiences} for:item="exp" for:index="index">
+                    <div key={exp.id} class="position" data-index={index} onclick={toggleDescription}>
+                        <div class="position-header">
+                            <div class="company-logo">
+                                <img src={exp.imageUrl} alt="Company Logo">
+                            </div>
+                            <div class="position-name">
+                                <h3>{exp.Title__c}</h3>
+                                <div class="position-timeframe">
+                                    <span class="text-muted">
+                                        <lightning-formatted-date-time value={exp.Start_Date__c} month="short" year="numeric"></lightning-formatted-date-time> - 
+                                        <lightning-formatted-date-time value={exp.End_Date__c} month="short" year="numeric"></lightning-formatted-date-time>
+                                    </span>
+                                </div>
+                                <div class="company">
+                                    <div class="company-name">{exp.Company__c}</div>           
+                                    <div class="company-location">{exp.location__c}</div>
+                                </div>
+                            </div>
+                            <div class="toggle-button">
+                                <lightning-icon
+                                    class="comments-icn"
+                                    icon-name={exp.iconName}
+                                    size="medium"
+                                    title={exp.iconTitle}
+                                    data-index={index}>
+                                </lightning-icon>
+                            </div>
+                        </div>
+                        <template if:true={exp.showDescription}>
+                            <div class="position-description">
+                                <p>{exp.Description__c}</p>
+                                <br>
+                                <div class="position-technologies">
+                                    <p>Tools and responsibilities:</p>
+                                    <lightning-formatted-rich-text formats={formats} value={exp.Technologies__c}></lightning-formatted-rich-text>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </template>                
+            </div>
+
+            <div class="education">
+                <div class="header">
+                    <h1>Education</h1>
+                </div>
+
+                <template lwc:if={isLoadingEducation}>
+                    <lightning-spinner alternative-text="Loading education..." size="medium"></lightning-spinner>
+                </template>
+
+                <template for:each={educationData} for:item="edu">
+                    <div key={edu.id} class="edu-list">
+                        <div class="edu-logo">
+                            <img src={edu.imageUrl} alt="Education Logo">
+                        </div>
+                        <div class="edu-name">
+                            <h3>{edu.Education_Name__c}</h3>
+                            <div class="edu-timeframe">
+                                <span class="text-muted">{edu.Date__c}</span>
+                            </div>
+                        </div>
+                        <div class="edu-details">
+                            <div class="edu-name">{edu.Degree__c}</div>
+                            <div class="edu-location">{edu.Location__c}</div>
+                        </div>
+                        <div class="edu-description">
+                            <p>{edu.Education_Description__c}</p>
+                        </div>        
+                    </div>
+                </template>
+            </div>
+
+            <div class="certificates">
+                <div class="header">
+                    <h1>Licenses & certifications</h1>
+                </div>
+
+                <template lwc:if={isLoadingCertificates}>
+                    <lightning-spinner alternative-text="Loading certificates..." size="medium"></lightning-spinner>
+                </template>
+
+                <template for:each={certificatesData} for:item="cert">
+                    <div key={cert.id} class="cert-list">
+                        <div class="cert-logo">
+                            <img src={cert.imageUrl} alt="Certificat Logo">
+                        </div>
+                        <div class="cert-name">
+                            <h3>{cert.Name}</h3>
+                            <div class="cert-issued">
+                                <span class="text-muted">Issued: {cert.Issue_date__c}</span>
+                            </div>
+                        </div>
+                        <div class="cert-details">
+                            <div class="cert-id">Credential ID: {cert.Credential_ID__c}</div>      
+                        </div>  
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <div class="right">
+            <div class="contact-details">
+                <div class="header">
+                    <h1>{label.contactDetails}</h1>
+                </div> 
+                <div class="contact-info">
+                    <p>Address: Kong Eriks Have 22,</p>
+                    <p>2765 Smørum, Denmark </p>
+                    <p>Ph. nr.: +45 71663966 </p>
+                    <p>E-mail: <a href="mailto: nemo.spaske@live.com">nemo.spaske@live.com</a></p>
+                    <p>Trailblazer: <a target="_blank" href="https://www.salesforce.com/trailblazer/scagsfu7s6pdgfi768">scagsfu7s6pdgfi768</a></p>
+                    <p>Github: <a href="https://github.com/nspa4921">https://github.com/nspa4921</a></p>
+                </div>
+            </div>
+            <div class="contact-details">
+                <div class="header">
+                    <h1>{label.languagues}</h1>
+                </div> 
+                <div class="contact-info">
+                    <p>Danish - Professional working proficiency</p>
+                    <p>English - Professional working proficiency</p>
+                    <p>Hungarian - Professional working proficiency</p>
+                    <p>Serbian - Full professional proficiency</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</template>

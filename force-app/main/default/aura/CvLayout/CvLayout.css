@@ -1,0 +1,15 @@
+.THIS .contentPanel:before,
+.THIS .contentPanel:after {
+    content: " ";
+    display: table;
+}
+.THIS .contentPanel:after {
+    clear: both;
+}
+.THIS .top {
+    width: 100%;
+}
+
+.THIS .siteforceStarterBody .cCenterPanel{
+    width : 1000px
+ }
