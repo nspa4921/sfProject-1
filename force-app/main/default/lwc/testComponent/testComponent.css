@@ -14,10 +14,10 @@
     box-sizing: border-box;
     position: relative;
     top: -4rem;
-    padding-left: 25%;
-    padding-right: 25%;
+    padding-left: 18%;
+    padding-right: 18%;
     display: flex;
-    gap:3%;
+    gap: 3%;
 }
 
 .left {
@@ -98,8 +98,10 @@
     font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 5px;
-    line-height: 0.2;
+    line-height: 1.3;
     padding-top: 22px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .experience .position .position-timeframe span {
@@ -129,6 +131,7 @@
     color: #333;
     text-align: justify;
     font-size: 1rem;
+    padding-left: 15px;
 }
 
 .experience .position .position-description .position-technologies  {
@@ -166,7 +169,7 @@
 }
 
 .experience .company-logo img {
-    max-width: 70px;
+    max-width: 100%;
     max-height: 70px;
     object-fit: contain;
 }
@@ -215,8 +218,10 @@
     font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 5px;
-    line-height: 0.2;
+    line-height: 1.3;
     padding-top: 22px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .education .edu-list .edu-timeframe span {
@@ -234,6 +239,7 @@
     font-size: 1rem;
     font-weight: 600;
     line-height: 1.2;
+    text-align: left;
 }
 
 .education .edu-list .edu-description{
@@ -256,7 +262,7 @@
 }
 
 .education .edu-logo img {
-    max-width: 70px;
+    max-width: 100%;
     max-height: 70px;
     object-fit: contain;
 }
@@ -283,6 +289,36 @@
     font-weight: normal;
 }
 
+.certificates .cert-footer {
+    padding: 10px;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 1rem;
+    border-top: 1px solid rgb(221, 219, 218);
+    transition: color 0.3s ease;
+}
+
+.certificates .cert-footer:hover {
+    color: #707070;
+    background-color: #f2f2f2;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+}
+
+.certificates .cert-footer a {
+    display: inline-*;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    color: #7f7f7f;
+    text-decoration: none;
+}
+
+.certificates .cert-footer a:hover {
+    color: #0070d2;
+}
+
 .certificates .cert-list {
     margin-bottom: 20px;
     padding: 15px;
@@ -296,8 +332,10 @@
     font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 5px;
-    line-height: 0.2;
-    padding-top: 22px;
+    line-height: 1.3;
+    /* padding-top: 22px; */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .certificates .cert-list .cert-name .cert-issued span {
@@ -333,6 +371,7 @@
     font-weight: 600;
     line-height: 1.9;
 }
+
 .details {
     display: block;
     transition: transform 0.2s linear;
@@ -340,6 +379,7 @@
     max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
+    padding: 20px 35px 0px;
 }
 
 .name {
@@ -425,12 +465,14 @@ h1 {
     --sds-c-icon-color-foreground-default: lightgray; 
 }
 
+.make-this-dang-icon-blue {
+    color: blue;
+}
+
 /* Styles for screens larger than 480px */
 @media (min-width: 481px) {
     .container {
         flex-direction: row;
-        padding-left: 25%;
-        padding-right: 25%;
     }
 
     .left {
@@ -447,11 +489,6 @@ h1 {
 
     .about-me {
         font-size: 0.9rem;
-    }
-    
-    .container {
-        padding-left: 12%;
-        padding-right: 12%;
     }
 
     .left {
@@ -543,11 +580,23 @@ h1 {
     }
 
 
+    /* Updated: force position name to wrap and clamp to 2 lines on mobile */
     .experience .position .position-name h3 {
         font-size: 0.8rem;
         margin-bottom: 0px;
-        line-height: 0;
+        /* use a readable line-height instead of 0 so text can wrap */
+        line-height: 1.1;
         padding-top: 15px;
+
+        /* allow wrapping and limit to 2 lines with ellipsis */
+        display: -webkit-box;
+        /* standard property for line clamping */
+        line-clamp: 2;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
     }
     
     .experience .position .position-name .position-timeframe {
@@ -595,6 +644,7 @@ h1 {
         line-height: 1.2;
         margin-top: 5px;
         padding-top: 5px;
+        text-align: left;
     }
 
     .education .edu-list .edu-name h3 {
@@ -646,5 +696,52 @@ h1 {
 
     .contact-details p{
         font-size: 0.9rem;
+    }
+    
+  
+}
+
+/* Optimization for screens wider than 1386px */
+@media (min-width: 1386px) {
+    .container {
+        gap: 4%;
+    }
+    
+    .left {
+        width: 68%;
+    }
+    
+    .right {
+        width: 32%;
+    }
+}
+
+/* Optimization for screens smaller than 1236px */
+@media (max-width: 1235px) {
+    .container {
+        flex-direction: column;
+        gap: 1.5%;
+    }
+    
+    .left, .right {
+        width: 100%;
+    }
+    
+    .banner {
+        height: 12rem;
+    }
+    
+    .experience .company-logo,
+    .education .edu-logo,
+    .certificates .cert-logo {
+        width: 80px;
+        height: 80px;
+        margin-right: 10px;
+    }
+    
+    .experience .position,
+    .education .edu-list,
+    .certificates .cert-list {
+        padding: 12px 20px;
     }
 }

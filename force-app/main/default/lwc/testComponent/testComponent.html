@@ -31,7 +31,7 @@
 
             <div class="experience">
                 <div class="header">
-                    <h1>Experience</h1>
+                    <h1>{label.experience}</h1>
                 </div>
 
                 <template lwc:if={isLoadingWorkExp}>
@@ -72,7 +72,7 @@
                                 <p>{exp.Description__c}</p>
                                 <br>
                                 <div class="position-technologies">
-                                    <p>Tools and responsibilities:</p>
+                                    <p>{label.toolsAndResp}</p>
                                     <lightning-formatted-rich-text formats={formats} value={exp.Technologies__c}></lightning-formatted-rich-text>
                                 </div>
                             </div>
@@ -83,7 +83,7 @@
 
             <div class="education">
                 <div class="header">
-                    <h1>Education</h1>
+                    <h1>{label.education}</h1>
                 </div>
 
                 <template lwc:if={isLoadingEducation}>
@@ -114,13 +114,11 @@
 
             <div class="certificates">
                 <div class="header">
-                    <h1>Licenses & certifications</h1>
+                    <h1>{label.certificates}</h1>
                 </div>
-
                 <template lwc:if={isLoadingCertificates}>
                     <lightning-spinner alternative-text="Loading certificates..." size="medium"></lightning-spinner>
                 </template>
-
                 <template for:each={certificatesData} for:item="cert">
                     <div key={cert.id} class="cert-list">
                         <div class="cert-logo">
@@ -137,21 +135,30 @@
                         </div>  
                     </div>
                 </template>
+                <div class="cert-footer">
+                    <a target="_blank" href="https://www.linkedin.com/in/nemanja-spasic87/details/certifications/">
+                        More on Linkedin
+                    </a>
+                </div>
             </div>
         </div>
 
         <div class="right">
             <div class="contact-details">
                 <div class="header">
-                    <h1>{label.contactDetails}</h1>
-                </div> 
+                    <h1>{label.conDetails}</h1>
+                </div>          
+                <template lwc:if={isLoadingContactDetails}>
+                    <lightning-spinner alternative-text="Loading contacts..." size="medium"></lightning-spinner>
+                </template>
+                
                 <div class="contact-info">
-                    <p>Address: Kong Eriks Have 22,</p>
+                    <p>{label.conAddress}: Kong Eriks Have 22,</p>
                     <p>2765 Smørum, Denmark </p>
-                    <p>Ph. nr.: +45 71663966 </p>
-                    <p>E-mail: <a href="mailto: nemo.spaske@live.com">nemo.spaske@live.com</a></p>
-                    <p>Trailblazer: <a target="_blank" href="https://www.salesforce.com/trailblazer/scagsfu7s6pdgfi768">scagsfu7s6pdgfi768</a></p>
-                    <p>Github: <a href="https://github.com/nspa4921">https://github.com/nspa4921</a></p>
+                    <p>{label.conPhone}: +45 71663966 </p>
+                    <p>{label.conEmail}: <a href="mailto: nemo.spaske@live.com">nemo.spaske@live.com</a></p>
+                    <p>{label.conTrailblazer}: <a target="_blank" href="https://www.salesforce.com/trailblazer/scagsfu7s6pdgfi768">scagsfu7s6pdgfi768</a></p>
+                    <p>{label.conGithub}: <a target="_blank" href="https://github.com/nspa4921">https://github.com/nspa4921</a></p>
                 </div>
             </div>
             <div class="contact-details">
@@ -159,10 +166,10 @@
                     <h1>{label.languagues}</h1>
                 </div> 
                 <div class="contact-info">
-                    <p>Danish - Professional working proficiency</p>
-                    <p>English - Professional working proficiency</p>
-                    <p>Hungarian - Professional working proficiency</p>
-                    <p>Serbian - Full professional proficiency</p>
+                     <p>{label.langDanish}</p>
+                    <p>{label.langEnglish}</p>
+                    <p>{label.langHungarian}</p>
+                    <p>{label.langSerbian}</p> 
                 </div>
             </div>
         </div>

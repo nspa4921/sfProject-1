@@ -8,11 +8,24 @@ import EducationLogos from '@salesforce/resourceUrl/EducationImages';
 import My_Resource from '@salesforce/resourceUrl/Nemanja_Spasic';
 import Nemanja_Cv from '@salesforce/resourceUrl/NemanjaCvPdf'; 
 
-import contactDetails from '@salesforce/label/c.nsContactDetails';
+import conTrailblazer from '@salesforce/label/c.nsTrailblazer';
+import conDetails from '@salesforce/label/c.nsContactDetails';
+import toolsAndResp from '@salesforce/label/c.nsToolsAndResp';
+import certificates from '@salesforce/label/c.nsCertificates';
 import aboutMeDesc from '@salesforce/label/c.nsAboutMeDesc';
+import langHungarian from '@salesforce/label/c.nsHungarian';
 import languagues from '@salesforce/label/c.nsLanguagues';
+import experience from '@salesforce/label/c.nsExperience';
+import education from '@salesforce/label/c.nsEducation';
+import langEnglish from '@salesforce/label/c.nsEnglish';
+import langSerbian from '@salesforce/label/c.nsSerbian';
+import conAddress from '@salesforce/label/c.nsAddress';
 import cvProfileName from '@salesforce/label/c.nsName';
 import location from '@salesforce/label/c.nsLocation';
+import langDanish from '@salesforce/label/c.nsDanish';
+import conGithub from '@salesforce/label/c.nsGithub';
+import conPhone from '@salesforce/label/c.nsPhone';
+import conEmail from '@salesforce/label/c.nsEmail';
 import role from '@salesforce/label/c.nsRole';
 
 export default class TestComponent extends LightningElement {
@@ -26,9 +39,6 @@ export default class TestComponent extends LightningElement {
     title;
 
     expandedIndex = null;
-    isLoadingWorkExp = true;
-    isLoadingEducation = true;
-    isLoadingCertificates = true;
 
     get myCv(){
         return Nemanja_Cv;
@@ -39,13 +49,32 @@ export default class TestComponent extends LightningElement {
     }
 
     label = {
+        conTrailblazer,
         cvProfileName,
-        contactDetails,
+        langHungarian,
+        toolsAndResp,
+        certificates,
         aboutMeDesc,
+        langEnglish,
+        langSerbian,
+        experience,
         languagues,
+        conDetails,
+        langDanish,
+        conAddress,
+        conGithub,
+        education,
         location,
+        conPhone,
+        conEmail,
         role
     };
+    
+    connectedCallback() {  
+        this.isLoadingWorkExp = true;
+        this.isLoadingEducation = true;
+        this.isLoadingCertificates = true;
+    }
 
     @wire(getWorkExperiences)
     wiredWorkExperiences({ error, data }) {
@@ -137,8 +166,8 @@ export default class TestComponent extends LightningElement {
     handleDownload() {
         const link = document.createElement('a');
         link.href = this.myCv;
-        link.target = '_blank'; // Open in a new tab
-        link.download = 'Nemanja_Spasic_CV.pdf'; // Set the filename
+        link.target = '_blank'; 
+        link.download = 'Nemanja_Spasic_CV.pdf'; 
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
